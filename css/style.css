@@ -51,8 +51,9 @@ main {
     display: inline-block; 
   }
 
-  .buttonPlay{
+  #buttonPlay{
     display: block;
+    width: 75%;
     height: 30px;
     color: blue;
     margin-top: 35px;
@@ -64,8 +65,9 @@ main {
     cursor: pointer;
   }
 
-  .buttonSubmit{
+  #buttonSubmit{
     display: block;
+    width: 75%;
     height: 30px;
     color: blue;
     margin-top: 35px;
@@ -75,10 +77,9 @@ main {
     font-size: 18px;
     border: solid black 2px;  
     cursor: pointer;
-
   }
 
-  .buttonReveal{
+  #buttonReveal{
     display: block;
     height: 30px;
     color: blue;
