@@ -1,0 +1,92 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+main {
+    display: grid;
+    font-size: 30px;
+    text-align: center;
+    grid-template-columns: 2fr 2fr;
+    }
+
+
+.header {
+    grid-column: span 2;
+}
+
+.leftContainer {
+    background-color: #f1f1f1;
+    border: solid red 2px;
+    padding: 10px;
+  }
+
+.boardGame {
+    margin: 50px;
+}
+
+.board {
+    text-align: left;
+}
+
+.rightContainer {
+    background-color: dodgerblue;
+    border: solid black 2px;
+    padding: 10px;
+  }
+
+.peg {
+    height: 50px;
+    width: 50px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .code {
+    height: 50px;
+    width: 50px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block; 
+  }
+
+  .buttonPlay{
+    display: block;
+    height: 30px;
+    color: blue;
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px 28px;
+    font-size: 18px;
+    border: solid black 2px;  
+    cursor: pointer;
+  }
+
+  .buttonSubmit{
+    display: block;
+    height: 30px;
+    color: blue;
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px 28px;
+    font-size: 18px;
+    border: solid black 2px;  
+    cursor: pointer;
+
+  }
+
+  .buttonReveal{
+    display: block;
+    height: 30px;
+    color: blue;
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px 28px;
+    font-size: 18px;
+    border: solid black 2px;  
+    cursor: pointer;
+  }
