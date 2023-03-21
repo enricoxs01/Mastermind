@@ -26,6 +26,8 @@ main {
     background-color: #f1f1f1;
     border: solid red 2px;
     padding: 10px;
+    min-width: 400px;
+    max-width: 600px;    
   }
 
 .boardGame {
@@ -40,28 +42,20 @@ main {
     display: inline-block;
   }
 
-.keypeg {
-    height: 20px;
-    width: 20px;
-    background-color: black;
-    border-radius: 50%;
-}
-
 
 .code {
-    min-width: 60px;
+    min-width: 75px;
     min-height: 60px;
-    background-color: #bbb;
-    border-radius: 50%;
+    padding: 10px 20px 10px 20px;
     display: inline-block;
+    border: ridge green 5px;
 }
 
 .rightContainer {
-    background-color: dodgerblue;
-    border: solid black 2px;
     padding: 10px;
     text-align: center;
     align-items: center;
+    min-width: 400px;
 }
 
   #buttonPlay{
