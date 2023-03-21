@@ -18,6 +18,7 @@ let keyPegsRowEls = [[],[]];
 const playButtonEl = document.getElementById("buttonPlay");
 const submitButtonEl = document.getElementById("buttonSubmit");
 const revealButtonEl = document.getElementById("buttonReveal");
+const messageEl = document.getElementById("message")
 
 
 
@@ -100,7 +101,7 @@ function handlePlay(target) {
     submitButtonEl.disable=false;
     revealButtonEl.disable=false;
     playButtonEl.disable = true;
-    //addKeyPegsToRow(allRowsEl[rowInPlay]);
+    addKeyPegsToRow(allRowsEl[rowInPlay]);
 
 }
 
@@ -129,7 +130,10 @@ function handleSubmit(target) {
         return
     } 
     else { //try again - game still in play
+        allRowsEl[rowInPlay].style.border = ""   
         rowInPlay = rowInPlay + 1;
+        allRowsEl[rowInPlay].style.border = "thick solid #0000FF"
+
         for (let p=0; p<maxPegs;p++) {
             pegsRowEls[rowInPlay][p].addEventListener('click',handlePegClick);
         }
@@ -148,7 +152,6 @@ function handlePegClick(event) {
     } else { 
         rowGuess[pegIndex]= 0;
         }
-    console.log("The new color is " + rowGuess[pegIndex])
     event.target.style.backgroundColor = possibleColors[rowGuess[pegIndex]];
 }
 
@@ -162,9 +165,7 @@ function addKeyPegsToRow ( rowEl) {
     rowEl.append(rowSquareEl)
     for (let i=0; i<maxPegs; i++) {
         let keyPegEl = document.createAttribute("div");
-        keyPegEl.style.width = "15px";
-        keyPegEl.style.height = "15px";
-        keyPegEl.style.border = "thin solid #0000FF"
+        keyPegEl.className = "keyPeg"//+toString(i);
         rowSquareEl.append(keyPegEl);
         keyPegsRowEls[rowInPlay][i]=keyPegEl;
     }

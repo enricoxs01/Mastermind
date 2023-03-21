@@ -32,21 +32,20 @@ main {
     margin: 20px;
 }
 
-.rightContainer {
-    background-color: dodgerblue;
-    border: solid black 2px;
-    padding: 10px;
-    text-align: left;
-  }
-
 .peg {
     height: 60px;
     width: 60px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    text-align: left;
   }
+
+.keypeg {
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    border-radius: 50%;
+}
 
 
 .code {
@@ -57,17 +56,22 @@ main {
     display: inline-block;
 }
 
+.rightContainer {
+    background-color: dodgerblue;
+    border: solid black 2px;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+}
+
   #buttonPlay{
     display: block;
     width: 75%;
-    height: 30px;
+    height: 50px;
     border-radius: 25%;
     background-color: blue;
     color: white;
-    margin-top: 35px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 14px 28px;
+    margin: 20px auto 20px auto;
     font-size: 18px;
     border: solid black 2px;  
     cursor: pointer;
@@ -76,12 +80,11 @@ main {
   #buttonSubmit{
     display: block;
     width: 75%;
-    height: 30px;
-    color: blue;
-    margin-top: 35px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 14px 28px;
+    height: 50px;
+    border-radius: 25%;
+    background-color: blue;
+    margin: 100px auto 20px auto;
+    color: white;
     font-size: 18px;
     border: solid black 2px;  
     cursor: pointer;
@@ -89,13 +92,14 @@ main {
 
   #buttonReveal{
     display: block;
-    height: 30px;
-    color: blue;
-    margin-top: 35px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 14px 28px;
+    width: 75%;
+    height: 50px;
+    border-radius: 25%;
+    background-color: blue;
+    margin: 50px auto 20px auto;
+    color: white;
     font-size: 18px;
     border: solid black 2px;  
     cursor: pointer;
+
   }
