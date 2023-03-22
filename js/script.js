@@ -2,15 +2,16 @@
 const maxPegs = 4;     // maximum number of horizontal pegs
 const maxGuesses = 12  //maximum number of guesses
 const possibleColors = ['red','blue','black','yellow','green','purple']
-const debug = true;
+const debug = true; //this only for debugging purposes 
 
 	/*----- state variables -----*/
 let winningCombination = [];
 let rowInPlay = 0;
-let rowGuess =[0,0,0,0]
+let rowGuess =[-1,-1,-1,-1]
 let codePegsEls =[];
 let pegsRowEls = [[],[]];
 let keyPegsRowEls = [[],[]];
+let feedback = null;
 
 	/*----- cached elements  -----*/
 const allRowsEl = document.querySelectorAll(".row")
@@ -60,16 +61,26 @@ function addPegsToRow(rowEl,i,pegCount,className) {
 }
 
 function resetGame () {
-
-    //remove any currently highlighted row and feedback box
-    allRowsEl[rowInPlay].style.border = ""   
-//    if (feedbackEl !== undefined ) {
-      if (allRowsEl[rowInPlay].children.length > maxPegs){
-        for (let i=0;i<=rowInPlay;i++) {
-            console.log(allRowsEl[i].childElementCount)
-            allRowsEl[i].removeChild(allRowsEl[i].children[4]);
+    //remove any currently highlighted row 
+    allRowsEl[rowInPlay].style.border = "" 
+    //remove feedback boxes for all rows
+    for (let row=0; row < maxGuesses; row++)
+    {   let numElements = allRowsEl[row].children.length;
+        if ( numElements > maxPegs) { //this is to test that there is a box to be removed
+            console.log ("row " + row + "there is a box")
+            let box = allRowsEl[row].lastElementChild
+            console.log (box)
+            if (box.children.length > 0)  {//this is to test whether there are pegs in the feedback box 
+                console.log (" \n row has pegs")
+                while (box.firstChild) {
+                    box.removeChild(box.firstChild);
+                }
+             }
+            allRowsEl[row].removeChild(box); //remove outer box element
         }
-    }
+    }  
+    
+
 
     // clear out any messages
     messageEl.innerText ="";
@@ -80,7 +91,7 @@ function resetGame () {
             pegsRowEls[i][p].style.backgroundColor = "grey"; 
         }
     }
-    rowGuess = [0,0,0,0]
+    rowGuess = [-1,-1,-1,-1]
 
     //blank out the code
     for(let p=0; p<maxPegs; p++) {
@@ -103,6 +114,7 @@ function resetGame () {
 
 function handlePlay(target) {
     // reset the game
+    allRowsEl[rowInPlay].style.border = ""   
     resetGame();
 
     // add event handlers to first row of pegs
@@ -110,9 +122,7 @@ function handlePlay(target) {
     for (let p=0; p<maxPegs;p++) {
         pegsRowEls[rowInPlay][p].addEventListener('click', handlePegClick)
     }
-
-    // add the feedback small window
-   // feedbackEl = addKeyPegsDiv(allRowsEl[rowInPlay]);
+    feedback = addKeyPegsDiv(allRowsEl[rowInPlay]);
 
     //diasble Play and enable Submit and Reveal
     submitButtonEl.removeAttribute("disabled");
@@ -121,23 +131,16 @@ function handlePlay(target) {
     revealButtonEl.style.backgroundColor = "blue"
     playButtonEl.setAttribute("disabled",true);
     playButtonEl.style.backgroundColor = "grey"
-
-
 }
 
 function handleReveal(target) {
-    console.log("reveal was pressed")
     for (let p=0; p<maxPegs;p++) {
         pegsRowEls[rowInPlay][p].removeEventListener('click',handlePegClick);
     }
     if (!debug) {
-        console.log("not debugging")
         codeEl.style.backgroundColor ="";
         for (let i=0;i<maxPegs;i++) {
-            console.log(codePegsEls[i])
             codePegsEls[i].style.backgroundColor = possibleColors[winningCombination[i]];  
-            console.log(winningCombination[i])
-            console.log(codePegsEls[i])
 
         }
     }
@@ -171,6 +174,7 @@ function handleSubmit(target) {
         return
     }
     else if (rowInPlay === (maxGuesses-1)) {   //the maximum number of tries has been reached - game lost
+        setKeyPegs(feedback);
         submitButtonEl.setAttribute("disabled",true);
         submitButtonEl.style.backgroundColor = "grey";
         revealButtonEl.setAttribute("disabled",true);
@@ -183,17 +187,17 @@ function handleSubmit(target) {
     else { //try again - game still in play
         //move the border to the new rowInPlay and evaluate current guess
         allRowsEl[rowInPlay].style.border = ""   
-        let feedback = addKeyPegsDiv(allRowsEl[rowInPlay]);
         setKeyPegs(feedback);
 
-        //then advance rowInPlay
-        rowGuess = [0,0,0,0]
+        //then clear out guess and advance rowInPlay
+        rowGuess = [-1,-1,-1,-1]
         rowInPlay = rowInPlay + 1;
         allRowsEl[rowInPlay].style.border = "thick solid #0000FF"
         messageEl.innerText= "Your last guess was incorrect...\n do you want to try again?"
         for (let p=0; p<maxPegs;p++) {
             pegsRowEls[rowInPlay][p].addEventListener('click',handlePegClick);
         }        
+        feedback = addKeyPegsDiv(allRowsEl[rowInPlay]);
     }
 }
 
@@ -223,7 +227,6 @@ function addKeyPegsDiv (rowEl) {
 }
 
 function setKeyPegs(rowKeyEl) {
-    console
     for (let i=0; i<maxPegs; i++) {
         let keyPegEl = document.createElement("div");
         keyPegEl.className = "keyPeg"
@@ -233,11 +236,9 @@ function setKeyPegs(rowKeyEl) {
         keyPegEl.style.display = "inline-block"
         keyPegEl.style.margin = "0px 5px 0px 5px";
         keyPegEl.style.border = "thin solid #0000FF"
-        console.log (" Win : " + winningCombination[i] + " Guess: " + rowGuess[i])
         if (winningCombination[i] === rowGuess[i]) {
             keyPegEl.style.backgroundColor = "green"
         } else {keyPegEl.style.backgroundColor = "red"}
-        console.log(keyPegEl)
         rowKeyEl.appendChild(keyPegEl);
     }
 }
