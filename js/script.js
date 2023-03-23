@@ -2,7 +2,7 @@
 const maxPegs = 4;     // maximum number of horizontal pegs
 const maxGuesses = 12  //maximum number of guesses
 const possibleColors = ['red','blue','black','yellow','green','purple']
-const debug = true; //this only for debugging purposes 
+const debug = false; //this only for debugging purposes 
 
 	/*----- state variables -----*/
 let winningCombination = [];
