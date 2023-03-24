@@ -67,11 +67,8 @@ function resetGame () {
     for (let row=0; row < maxGuesses; row++)
     {   let numElements = allRowsEl[row].children.length;
         if ( numElements > maxPegs) { //this is to test that there is a box to be removed
-            console.log ("row " + row + "there is a box")
             let box = allRowsEl[row].lastElementChild
-            console.log (box)
             if (box.children.length > 0)  {//this is to test whether there are pegs in the feedback box 
-                console.log (" \n row has pegs")
                 while (box.firstChild) {
                     box.removeChild(box.firstChild);
                 }
